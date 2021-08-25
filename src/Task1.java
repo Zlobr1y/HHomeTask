@@ -10,14 +10,21 @@ public class Task1 {
         int checks = Integer.parseInt(checksAndManagers[0]);
         int managers = Integer.parseInt(checksAndManagers[1]);
         int bonus;
-        if (checks <= 0 || checks >= 100000) checks = 0;
-        if (managers <= 0 || managers >= 100000) managers = 0;
+        double sum = 0.0;
+        int[] moneyOnChecks = new int[checks];
+        if (checks <= 0) {
+            checks = 0;
+        } else if (checks >= 100000){
+             checks = 100000;
+        }
+        if (managers <= 0) {
+            managers = 0;
+        } else if (managers >= 100000){
+             managers = 100000;
+        }
         System.out.println("Кол-во счетов: " + checks + " Кол-во менеджеров: " + managers);
 
         if (checks > 0 && managers > 0) {
-
-            int[] moneyOnChecks = new int[checks];
-            double sum = 0.0;
             for (int i = 0; i < moneyOnChecks.length; i++) {
                 moneyOnChecks[i] = Integer.parseInt(reader.readLine());
                 if (moneyOnChecks[i] > 100000000){
