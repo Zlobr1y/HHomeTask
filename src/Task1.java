@@ -9,7 +9,6 @@ public class Task1 {
         String[] checksAndManagers = var1.split(" ");
         int checks = Integer.parseInt(checksAndManagers[0]);
         int managers = Integer.parseInt(checksAndManagers[1]);
-        int bonus;
         int sum = 0;
         validateInputParams(checks);
         validateInputParams(managers);
@@ -21,9 +20,8 @@ public class Task1 {
             validateInputMoneyOnChecks(moneyOnChecks[i]);
             sum += moneyOnChecks[i];
         }
-        bonus = sum / managers;
-//            System.out.println("Сумма на счетах: " + sum);
-        System.out.println(calculateMaxBonus(bonus, managers, moneyOnChecks));
+//        System.out.println("Сумма на счетах: " + sum);
+        System.out.println(calculateMaxBonus(sum, managers, moneyOnChecks));
     }
 
     private static void validateInputParams(int number) {
@@ -42,9 +40,12 @@ public class Task1 {
         }
     }
 
-    private static int calculateMaxBonus(int maxBonus, int countManagers, int[] moneyOnChecks) {
+    private static int calculateMaxBonus(int sum, int countManagers, int[] moneyOnChecks) {
+        int maxBonus = sum/countManagers;
         int count = 0;
-        if (maxBonus > 0) {
+        if (maxBonus < 1) {
+            return 0;
+        } else {
             while (true) {
                 if (count < countManagers) {
                     for (int i = 0; i < moneyOnChecks.length; i++) {
@@ -58,7 +59,6 @@ public class Task1 {
                     break;
                 }
             }
-        } else return 0;
-        return maxBonus;
+        } return maxBonus;
     }
 }
