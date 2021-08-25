@@ -10,49 +10,47 @@ public class Task1 {
         int checks = Integer.parseInt(checksAndManagers[0]);
         int managers = Integer.parseInt(checksAndManagers[1]);
         int bonus;
-        double sum = 0.0;
+        int sum = 0;
+        validateInputParams(checks);
+        validateInputParams(managers);
         int[] moneyOnChecks = new int[checks];
-        if (checks <= 0) {
-            checks = 0;
-        } else if (checks >= 100000){
-             checks = 100000;
+//        System.out.println("Кол-во счетов: " + checks + " Кол-во менеджеров: " + managers);
+
+        for (int i = 0; i < moneyOnChecks.length; i++) {
+            moneyOnChecks[i] = Integer.parseInt(reader.readLine());
+            validateInputMoneyOnChecks(moneyOnChecks[i]);
+            sum += moneyOnChecks[i];
         }
-        if (managers <= 0) {
-            managers = 0;
-        } else if (managers >= 100000){
-             managers = 100000;
+        bonus = sum / managers;
+//            System.out.println("Сумма на счетах: " + sum);
+        System.out.println(calculateMaxBonus(bonus, managers, moneyOnChecks));
+    }
+
+    private static void validateInputParams(int number) {
+        if (number <= 0) {
+            System.out.println("Число " + number + " меньше или равно нулю.");
+        } else if (number >= 100000) {
+            System.out.println("Число " + number + " превышает допустимый лимит.");
         }
-        System.out.println("Кол-во счетов: " + checks + " Кол-во менеджеров: " + managers);
+    }
 
-        if (checks > 0 && managers > 0) {
-            for (int i = 0; i < moneyOnChecks.length; i++) {
-                moneyOnChecks[i] = Integer.parseInt(reader.readLine());
-                if (moneyOnChecks[i] > 100000000){
-                    moneyOnChecks[i] = 100000000;
-                }
-                sum += moneyOnChecks[i];
-            }
-
-            bonus = (int) sum / managers;
-
-
-            System.out.println("Сумма на счетах: " + sum);
-            System.out.println("Премия каждого менеджера составила: " + calculateMaxBonus(bonus, managers, moneyOnChecks));
-
-        } else {
-            System.out.println("Счетов не существует.");
+    private static void validateInputMoneyOnChecks(int number) {
+        if (number < 0) {
+            System.out.println("На счету не может быть отрицательное кол-во денег.");
+        } else if (number >= 100000000) {
+            System.out.println("Количество денег на счету превышает допустимый лимит.");
         }
     }
 
     private static int calculateMaxBonus(int maxBonus, int countManagers, int[] moneyOnChecks) {
         int count = 0;
-        if (maxBonus > 0){
-            while (true){
-                if (count < countManagers){
-                    for (int i = 0; i < moneyOnChecks.length; i++){
-                        count += moneyOnChecks[i]/maxBonus;
+        if (maxBonus > 0) {
+            while (true) {
+                if (count < countManagers) {
+                    for (int i = 0; i < moneyOnChecks.length; i++) {
+                        count += moneyOnChecks[i] / maxBonus;
                     }
-                    if (count < countManagers){
+                    if (count < countManagers) {
                         maxBonus--;
                         count = 0;
                     }
