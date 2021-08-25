@@ -13,14 +13,12 @@ public class Task1 {
         validateInputParams(checks);
         validateInputParams(managers);
         int[] moneyOnChecks = new int[checks];
-        System.out.println("Кол-во счетов: " + checks + " Кол-во менеджеров: " + managers);
 
         for (int i = 0; i < moneyOnChecks.length; i++) {
             moneyOnChecks[i] = Integer.parseInt(reader.readLine());
             validateInputMoneyOnChecks(moneyOnChecks[i]);
             sum += moneyOnChecks[i];
         }
-        System.out.println("Сумма на счетах: " + sum);
         System.out.println(calculateMaxBonus(sum, managers, moneyOnChecks));
     }
 
