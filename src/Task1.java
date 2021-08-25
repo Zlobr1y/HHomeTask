@@ -10,11 +10,12 @@ public class Task1 {
         int checks = Integer.parseInt(checksAndManagers[0]);
         int managers = Integer.parseInt(checksAndManagers[1]);
         int bonus;
-        int count = 0;
         if (checks <= 0 || checks >= 100000) checks = 0;
         if (managers <= 0 || managers >= 100000) managers = 0;
         System.out.println("Кол-во счетов: " + checks + " Кол-во менеджеров: " + managers);
-        if (checks > 0) {
+
+        if (checks > 0 && managers > 0) {
+
             int[] moneyOnChecks = new int[checks];
             double sum = 0.0;
             for (int i = 0; i < moneyOnChecks.length; i++) {
@@ -27,31 +28,32 @@ public class Task1 {
 
             bonus = (int) sum / managers;
 
-            if (bonus > 0){
-                while (true){
-                    if (count < managers){
-                        for (int i = 0; i < moneyOnChecks.length; i++){
-                            count += moneyOnChecks[i]/bonus;
-                        }
-                        if (count < managers){
-                            bonus--;
-                            count = 0;
-                        }
-                    } else {
-                        break;
-                    }
-                }
-            }
 
             System.out.println("Сумма на счетах: " + sum);
-            if (bonus < 1) {
-                bonus = 0;
-                System.out.println("Премия каждого менеджера составила: " + bonus);
-            } else {
-                System.out.println("Премия каждого менеджера составила: " + bonus);
-            }
+            System.out.println("Премия каждого менеджера составила: " + calculateMaxBonus(bonus, managers, moneyOnChecks));
+
         } else {
             System.out.println("Счетов не существует.");
         }
+    }
+
+    private static int calculateMaxBonus(int maxBonus, int countManagers, int[] moneyOnChecks) {
+        int count = 0;
+        if (maxBonus > 0){
+            while (true){
+                if (count < countManagers){
+                    for (int i = 0; i < moneyOnChecks.length; i++){
+                        count += moneyOnChecks[i]/maxBonus;
+                    }
+                    if (count < countManagers){
+                        maxBonus--;
+                        count = 0;
+                    }
+                } else {
+                    break;
+                }
+            }
+        } else return 0;
+        return maxBonus;
     }
 }
