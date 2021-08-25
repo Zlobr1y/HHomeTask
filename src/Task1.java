@@ -13,14 +13,14 @@ public class Task1 {
         validateInputParams(checks);
         validateInputParams(managers);
         int[] moneyOnChecks = new int[checks];
-//        System.out.println("Кол-во счетов: " + checks + " Кол-во менеджеров: " + managers);
+        System.out.println("Кол-во счетов: " + checks + " Кол-во менеджеров: " + managers);
 
         for (int i = 0; i < moneyOnChecks.length; i++) {
             moneyOnChecks[i] = Integer.parseInt(reader.readLine());
             validateInputMoneyOnChecks(moneyOnChecks[i]);
             sum += moneyOnChecks[i];
         }
-//        System.out.println("Сумма на счетах: " + sum);
+        System.out.println("Сумма на счетах: " + sum);
         System.out.println(calculateMaxBonus(sum, managers, moneyOnChecks));
     }
 
@@ -45,19 +45,14 @@ public class Task1 {
         int count = 0;
         if (maxBonus < 1) {
             return 0;
-        } else {
-            while (true) {
-                if (count < countManagers) {
-                    for (int i = 0; i < moneyOnChecks.length; i++) {
-                        count += moneyOnChecks[i] / maxBonus;
-                    }
-                    if (count < countManagers) {
-                        maxBonus--;
-                        count = 0;
-                    }
-                } else {
-                    break;
-                }
+        }
+        while (count < countManagers) {
+            for (int moneyOnCheck : moneyOnChecks) {
+                count += moneyOnCheck / maxBonus;
+            }
+            if (count < countManagers) {
+                maxBonus--;
+                count = 0;
             }
         }
         return maxBonus;
