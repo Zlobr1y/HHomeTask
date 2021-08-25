@@ -47,18 +47,12 @@ public class Main {
         if (maxBonus < 1) {
             return 0;
         }
-
-        while (count <= countManagers) {
+        while (count < countManagers) {
             for (int moneyOnCheck : moneyOnChecks) {
                 count += moneyOnCheck / maxBonus;
             }
-            if (count == countManagers){
-                return maxBonus;
-            } else if (count < countManagers) {
-                maxBonus = maxBonus / 2;
-                count = 0;
-            } else {
-                maxBonus = (int) (maxBonus * 1.5);
+            if (count < countManagers) {
+                maxBonus--;
                 count = 0;
             }
         }
