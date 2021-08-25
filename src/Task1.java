@@ -41,7 +41,7 @@ public class Task1 {
     }
 
     private static int calculateMaxBonus(int sum, int countManagers, int[] moneyOnChecks) {
-        int maxBonus = sum/countManagers;
+        int maxBonus = sum / countManagers;
         int count = 0;
         if (maxBonus < 1) {
             return 0;
@@ -59,6 +59,7 @@ public class Task1 {
                     break;
                 }
             }
-        } return maxBonus;
+        }
+        return maxBonus;
     }
 }
