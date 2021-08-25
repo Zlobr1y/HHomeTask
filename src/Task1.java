@@ -16,7 +16,6 @@ public class Task1 {
         System.out.println("Кол-во счетов: " + checks + " Кол-во менеджеров: " + managers);
         if (checks > 0) {
             int[] moneyOnChecks = new int[checks];
-            int min = moneyOnChecks[0];
             double sum = 0.0;
             for (int i = 0; i < moneyOnChecks.length; i++) {
                 moneyOnChecks[i] = Integer.parseInt(reader.readLine());
@@ -24,9 +23,6 @@ public class Task1 {
                     moneyOnChecks[i] = 100000000;
                 }
                 sum += moneyOnChecks[i];
-                if (moneyOnChecks[i] <= moneyOnChecks[0]) {
-                    min = moneyOnChecks[i];
-                }
             }
 
             bonus = (int) sum / managers;
@@ -47,15 +43,12 @@ public class Task1 {
                 }
             }
 
-
-
-            System.out.println("Счет с минимальной суммой: " + min);
             System.out.println("Сумма на счетах: " + sum);
             if (bonus < 1) {
                 bonus = 0;
-                System.out.println("Премия каждого менеджера составила :" + bonus);
+                System.out.println("Премия каждого менеджера составила: " + bonus);
             } else {
-                System.out.println("Премия каждого менеджера составила :" + bonus);
+                System.out.println("Премия каждого менеджера составила: " + bonus);
             }
         } else {
             System.out.println("Счетов не существует.");
